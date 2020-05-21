@@ -15,11 +15,12 @@ SocketServer::SocketServer(QObject *parent) : QObject(parent){
     }
 
     connect(server, SIGNAL(newConnection(void)), this, SLOT(getSocket(void)));
-    connect(socket, &QAbstractSocket::disconnected, socket, &QObject::deleteLater);
+    //connect(socket, &QAbstractSocket::disconnected, socket, &QObject::deleteLater);
 }
 
 SocketServer::~SocketServer(){
     delete server;
+    delete socket;
 }
 
 /*!

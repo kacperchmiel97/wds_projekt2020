@@ -96,13 +96,6 @@
       </item>
      </layout>
     </item>
-    <item>
-     <widget class="QSlider" name="verticalSlider">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -114,14 +107,50 @@
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuMenu">
+   <widget class="QMenu" name="menu">
     <property name="title">
      <string>Menu</string>
     </property>
+    <addaction name="actionReconnect"/>
+    <addaction name="actionShow_emulator"/>
+    <addaction name="actionReset_timebase"/>
+    <addaction name="actionExit"/>
    </widget>
-   <addaction name="menuMenu"/>
+   <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionReset_timebase">
+   <property name="text">
+    <string>Reset timebase</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Closes the window.</string>
+   </property>
+  </action>
+  <action name="actionReconnect">
+   <property name="text">
+    <string>Reconnect</string>
+   </property>
+   <property name="toolTip">
+    <string>Try to reconnect to host.</string>
+   </property>
+  </action>
+  <action name="actionShow_emulator">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show emulator</string>
+   </property>
+   <property name="toolTip">
+    <string>Shows data link emulator.</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

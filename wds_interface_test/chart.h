@@ -24,6 +24,7 @@ public:
 public slots:
     void updateValue(float t);
     void update(void);
+    void resetTime(void);
 
 private:
     QSplineSeries *series;

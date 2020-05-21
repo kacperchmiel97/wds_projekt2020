@@ -22,12 +22,7 @@ Chart::Chart(QObject *parent, QWidget *widget) : QObject(parent)
     view->setRenderHint(QPainter::Antialiasing);
     view->setGeometry(widget->geometry());
 
-    now= 0;
-
-    for(uint i= 0; i < SAMPLE_COUNT; i++){
-        series->append(now, 0);
-        now+= DT;
-    }
+    resetTime();
 
     xAxis->setMin(now - DT * SAMPLE_COUNT);
     xAxis->setMax(now);
@@ -52,6 +47,14 @@ void Chart::setYMinMax(float min, float max){
 }
 
 /*!
+ * \brief Resetuje czas wykresu do 0
+ */
+void Chart::resetTime(void){
+    now= 0;
+    series->clear();
+}
+
+/*!
  * \brief Ustawia tytuł wykresu
  * \param title
  */
@@ -64,7 +67,8 @@ void Chart::setTitle(QString title){
  */
 void Chart::update(void){
     series->append(now, currentValue);
-    series->remove(0);
+    if(series->count() > SAMPLE_COUNT)
+        series->remove(0);
 
     now+= DT;
     xAxis->setMin(now - DT * SAMPLE_COUNT);

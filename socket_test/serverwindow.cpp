@@ -1,5 +1,6 @@
 #include "serverwindow.h"
 #include "ui_serverwindow.h"
+#include <iostream>
 
 /*!
  * \brief Inicjalizuje okno emulatora
@@ -24,6 +25,9 @@ ServerWindow::ServerWindow(QWidget *parent) :
 
     ui->pidSlider->setMinimum(-1000);
     ui->pidSlider->setMaximum(1000);
+
+    pitch= x= y= theta= pid= 0;
+
 
     connect(ui->pitchSlider, SIGNAL(valueChanged(int)), this, SLOT(sendPitch(int)));
     connect(ui->thetaSlider, SIGNAL(valueChanged(int)), this, SLOT(sendTheta(int)));
