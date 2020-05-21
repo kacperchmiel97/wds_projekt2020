@@ -7,6 +7,9 @@ namespace Ui {
 class ServerWindow;
 }
 
+/*!
+ * \brief Okno emulatora
+ */
 class ServerWindow : public QWidget
 {
     Q_OBJECT

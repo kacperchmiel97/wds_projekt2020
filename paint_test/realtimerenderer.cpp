@@ -7,6 +7,9 @@ RealtimeRenderer::RealtimeRenderer(QWidget *parent) : QWidget(parent){
     setGeometry(parent->geometry());
 }
 
+/*!
+ * \brief Rysuje widok robota od boku na widżecie-rodzicu
+ */
 void RealtimeRenderer::paintEvent(QPaintEvent *){
     int x0= width()/2;
     int y0= height()-height()/4;

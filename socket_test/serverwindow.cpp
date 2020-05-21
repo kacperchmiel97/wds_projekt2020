@@ -1,6 +1,10 @@
 #include "serverwindow.h"
 #include "ui_serverwindow.h"
 
+/*!
+ * \brief Inicjalizuje okno emulatora
+ * \param parent
+ */
 ServerWindow::ServerWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ServerWindow)

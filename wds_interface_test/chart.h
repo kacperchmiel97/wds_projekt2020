@@ -5,9 +5,12 @@
 #include <QWidget>
 #include <QtCharts>
 
-#define SAMPLE_COUNT 200
-#define DT 0.05
+#define SAMPLE_COUNT 200 //!< Ilość próbek pokazywanych na wykresie
+#define DT 0.05 //!< Czas pomiędzy próbkami
 
+/*!
+ * \brief Rysuje wykres XY
+ */
 class Chart : public QObject
 {
     Q_OBJECT

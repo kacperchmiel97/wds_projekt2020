@@ -8,11 +8,21 @@ SocketClient::SocketClient(QObject *parent) : QObject(parent){
     QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
 }
 
+/*!
+ * \brief Inicjalizuje połączenie z hostem
+ * \param host IP hosta
+ * \param port Port hosta
+ * \param timeout Czas oczekiwania na połączenie
+ * \return Sukces nawiązania połączenia
+ */
 bool SocketClient::connectToHost(QString host, int port, int timeout){
     socket->connectToHost(host, port);
     return socket->waitForConnected(timeout);
 }
 
+/*!
+ * \brief Parsuje otrzymane dane i emituje sygnały
+ */
 void SocketClient::socketReadyRead(){
     infoText= socket->readLine();
     emit read(infoText);

@@ -5,6 +5,9 @@
 #include <QWidget>
 #include <QPainter>
 
+/*!
+ * \brief Rysuje mapę
+ */
 class MapRenderer : public QWidget
 {
     Q_OBJECT

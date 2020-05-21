@@ -10,6 +10,9 @@ MapRenderer::MapRenderer(QWidget *parent) : QWidget(parent){
     setGeometry(parent->geometry());
 }
 
+/*!
+ * \brief Rysuje mapę na widżecie-rodzicu
+ */
 void MapRenderer::paintEvent(QPaintEvent *){
     int x0= width()/2;
     int y0= height()/2;

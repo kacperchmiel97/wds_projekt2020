@@ -1,7 +1,10 @@
 #include "socketserver.h"
 #include <QTcpServer>
 
-
+/*!
+ * \brief Inicjalizuje połączenie z klientem
+ * \param parent
+ */
 SocketServer::SocketServer(QObject *parent) : QObject(parent){
 
     server= new QTcpServer(this);
@@ -19,6 +22,14 @@ SocketServer::~SocketServer(){
     delete server;
 }
 
+/*!
+ * \brief Wysyła dane w postaci stringa
+ * \param pitch Pochylenie robota
+ * \param x Współrzędna X
+ * \param y Współrzędna Y
+ * \param t Kąt względem osi Y na mapie
+ * \param pid Odpowiedź regulatora PID
+ */
 void SocketServer::sendData(float pitch, float x, float y, float t, float pid){
     QString msg;
     msg=

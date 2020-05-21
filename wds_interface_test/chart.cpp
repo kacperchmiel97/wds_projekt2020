@@ -1,5 +1,10 @@
 #include "chart.h"
 
+/*!
+ * \brief Inicjalizuje wykres na podanym widżecie
+ * \param parent Rodzic
+ * \param widget Widżet na któym ma być wyświetlany wykres
+ */
 Chart::Chart(QObject *parent, QWidget *widget) : QObject(parent)
 {
     series= new QSplineSeries;
@@ -36,15 +41,27 @@ Chart::~Chart(){
     delete view;
 }
 
+/*!
+ * \brief Ustawia zakres osi Y
+ * \param min
+ * \param max
+ */
 void Chart::setYMinMax(float min, float max){
     yAxis->setMin(min);
     yAxis->setMax(max);
 }
 
+/*!
+ * \brief Ustawia tytuł wykresu
+ * \param title
+ */
 void Chart::setTitle(QString title){
     chart->setTitle(title);
 }
 
+/*!
+ * \brief Dodaje nową próbkę do wykresu i przesuwa go
+ */
 void Chart::update(void){
     series->append(now, currentValue);
     series->remove(0);
@@ -56,6 +73,10 @@ void Chart::update(void){
     view->update();
 }
 
+/*!
+ * \brief Zapamiętuje najnowszą próbkę
+ * \param t
+ */
 void Chart::updateValue(float t){
     currentValue= t;
 }

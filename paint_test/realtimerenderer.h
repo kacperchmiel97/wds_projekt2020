@@ -5,6 +5,9 @@
 #include <QWidget>
 #include <QPainter>
 
+/*!
+ * \brief Rysuje widok robota od boku
+ */
 class RealtimeRenderer : public QWidget
 {
     Q_OBJECT

@@ -3,7 +3,10 @@
 
 #include <QtCore>
 #include <QtNetwork>
-
+/*!
+ * \brief Odbiera i parsuje dane
+ *
+ */
 class SocketClient : public QObject{
     Q_OBJECT
 public:

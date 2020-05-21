@@ -5,8 +5,9 @@
 #include <QString>
 #include <QSocketNotifier>
 
-
-// Klasa do asynchronicznego nasłuchiwania na wejściu stdin
+/*!
+ * \brief Klasa do asynchronicznego nasłuchiwania na wejściu stdin (nieużywana)
+ */
 class console : public QObject
 {
     Q_OBJECT

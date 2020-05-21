@@ -8,15 +8,15 @@
 #include <QMessageBox>
 #include <iostream>
 
+/*!
+ * \brief Emuluje hosta dostarczającego dane o robocie
+ */
 class SocketServer  : public QObject
 {
     Q_OBJECT
 public:
     explicit SocketServer(QObject *parent= 0);
     ~SocketServer();
-
-signals:
-
 
 private slots:
     void getSocket(void){
