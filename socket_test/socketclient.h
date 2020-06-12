@@ -19,10 +19,12 @@ signals:
     void updateTheta(float t);
     void updatePid(float pid);
     void newData(void);
+    void disconnected(void);
 
 public slots:
     bool connectToHost(QString host, int port, int timeout);
     void socketReadyRead(void);
+    void connection_lost(void);
 
 private:
     QTcpSocket *socket;

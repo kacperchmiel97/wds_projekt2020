@@ -21,13 +21,13 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent){
     pidChart->setTitle("PID response");
     pidChart->setYMinMax(-1000, 1000);
 
+    ipDialog= new ipdialog(this);
+    host_ip= "192.168.1.163";
+    ipDialog->setText(host_ip);
 
     server= new SocketServer(this);
     sw= new ServerWindow();
     client= new SocketClient(this);
-
-    //Łączenie z hostem
-    clientConnect();
 
     //Ustawianie emulatora
     connect(sw, SIGNAL(sendMsg(float, float, float, float, float)), server, SLOT(sendData(float, float, float, float, float)));
@@ -42,18 +42,18 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent){
     connect(client, SIGNAL(updateX(float)), mapDrawPlane, SLOT(setX(float)));
     connect(client, SIGNAL(updateY(float)), mapDrawPlane, SLOT(setY(float)));
 
+    //Ustawianie dialogu IP
+    connect(ipDialog, SIGNAL(enteredText(QString)), this, SLOT(clientConnect(QString)));
 
     //Inicjalizacja timera
     timer= new QTimer(this);
     QWidget::connect(timer, SIGNAL(timeout()), this, SLOT(draw(void)));
-    timer->start(50);
 
     connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(close()));
     connect(ui->actionReset_timebase, SIGNAL(triggered()), tiltChart, SLOT(resetTime()));
     connect(ui->actionReset_timebase, SIGNAL(triggered()), pidChart, SLOT(resetTime()));
     connect(ui->actionShow_emulator, SIGNAL(toggled(bool)), this, SLOT(emulatorToggleShow(bool)));
-    connect(ui->actionReconnect, SIGNAL(triggered()), this, SLOT(clientConnect()));
-
+    connect(ui->actionReconnect, SIGNAL(triggered()), ipDialog, SLOT(showWindow()));
 
     realTimeDrawPlane->show();
     mapDrawPlane->show();
@@ -68,11 +68,28 @@ void MainWindow::draw(void){
     pidChart->update();
 }
 
-void MainWindow::clientConnect(void){
-    if(!client->connectToHost("127.0.0.1", 4242, 500000)){
+void MainWindow::clientConnect(QString ip){
+    if(!client->connectToHost(ip, 4242, 5000)){
         errorBox.setText("Could not connect to host!");
+        errorBox.setWindowTitle("Error");
         errorBox.exec();
     }
+    else{
+        tiltChart->resetTime();
+        pidChart->resetTime();
+        timer->start(50);
+        ipDialog->hideWindow();
+    }
+}
+
+void MainWindow::connection_lost(void){
+    timer->stop();
+    errorBox.setText("Lost connection to host!");
+    errorBox.setWindowTitle("Error");
+    errorBox.exec();
+
+    tiltChart->resetTime();
+    pidChart->resetTime();
 }
 
 void MainWindow::emulatorToggleShow(bool show){
@@ -96,6 +113,7 @@ MainWindow::~MainWindow(){
     delete server;
     delete client;
     delete timer;
+    delete ipDialog;
 
     painter->end();
 }

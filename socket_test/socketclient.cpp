@@ -5,7 +5,8 @@
 
 SocketClient::SocketClient(QObject *parent) : QObject(parent){
     socket = new QTcpSocket(this);
-    QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(socketReadyRead()));
+    connect(socket, SIGNAL(disconnected()), this, SLOT(connection_lost()));
 }
 
 /*!
@@ -20,12 +21,18 @@ bool SocketClient::connectToHost(QString host, int port, int timeout){
     return socket->waitForConnected(timeout);
 }
 
+void SocketClient::connection_lost(void){
+    emit disconnected();
+}
+
 /*!
  * \brief Parsuje otrzymane dane i emituje sygnały
  */
 void SocketClient::socketReadyRead(){
     infoText= socket->readLine();
-    emit read(infoText);
+
+    //emit read(infoText);
+    //std::cout << infoText.toStdString();
 
     float pitch, x, y, t, pid;
 

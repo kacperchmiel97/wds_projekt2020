@@ -8,6 +8,7 @@
 #include "../paint_test/realtimerenderer.h"
 #include "../paint_test/maprenderer.h"
 #include "chart.h"
+#include "ipdialog.h"
 #include "../socket_test/socketclient.h"
 #include "../socket_test/socketserver.h"
 #include "../socket_test/serverwindow.h"
@@ -29,8 +30,9 @@ public:
 
 private slots:
     void draw(void);
-    void clientConnect(void);
+    void clientConnect(QString ip);
     void emulatorToggleShow(bool show);
+    void connection_lost(void);
 
 private:
     void closeEvent(QCloseEvent *event);
@@ -48,5 +50,7 @@ private:
     MapRenderer *mapDrawPlane;
     Chart *tiltChart;
     Chart *pidChart;
+    QString host_ip;
+    ipdialog *ipDialog;
 };
 #endif // MAINWINDOW_H

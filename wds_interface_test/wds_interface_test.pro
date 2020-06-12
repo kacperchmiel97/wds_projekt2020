@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     chart.cpp \
     console.cpp \
+    ipdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     ../socket_test/socketclient.cpp \
@@ -30,6 +31,7 @@ SOURCES += \
 HEADERS += \
     chart.h \
     console.h \
+    ipdialog.h \
     mainwindow.h \
     ../socket_test/socketclient.h \
     ../socket_test/socketserver.h \
@@ -40,6 +42,7 @@ HEADERS += \
 
 FORMS += \
     ../socket_test/serverwindow.ui \
+    ipdialog.ui \
     mainwindow.ui
     ../socket_test/serverwindow.ui
 
